@@ -1,31 +1,7 @@
-import React from "react";
+import React, { useImperativeHandle } from "react";
 
 class CartItem extends React.Component {
    
-    increaseQty = () => {
-        // this.state.qty += 1;
-
-        //setstate i used to rerender the state
-        //setState form 1
-        // this.setState({
-        //     qty: this.state.qty + 1
-        // });
-
-        //setState form 2 - if prevState require use this funcio for setstate
-        this.setState((prevState) => {
-            return {
-                qty: prevState.qty + 1
-            }
-        });
-
-    }
-    decreaseQty = () => {
-        this.setState((prevState) => {
-            if(prevState.qty > 0){
-                return {qty: prevState.qty - 1}
-            }
-        });
-    }
     render() {
         console.log(this.props)
         const {price, title, qty} = this.props.product;
@@ -44,13 +20,13 @@ class CartItem extends React.Component {
                             alt="increase" 
                             className="action-icons" 
                             src="https://image.flaticon.com/icons/svg/992/992651.svg"
-                            onClick = {this.increaseQty}></img>
+                            onClick = {() => this.props.onIncreaseQty(this.props.product)}></img>
                             
                         <img 
                             alt="decrease" 
                             className="action-icons" 
                             src="https://image.flaticon.com/icons/svg/1665/1665612.svg"
-                            onClick = {this.decreaseQty}></img>
+                            onClick = {() => this.props.onDecreaseQty(this.props.product)}></img>
                         <img 
                             alt="delete" 
                             className="action-icons" 
